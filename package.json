@@ -1,0 +1,21 @@
+{
+  "name": "asd",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo test"
+  },
+  "author": "Lunar Moon",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "open": "^10.1.0",
+    "opn": "^6.0.0",
+    "tmi": "^0.2.2",
+    "tmi.js": "^1.8.5"
+  },
+  "type": "module"
+}
