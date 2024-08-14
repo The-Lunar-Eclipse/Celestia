@@ -99,6 +99,7 @@ function startCelestia(token, data)
     client.connect().catch(console.log);
 
     var messageCount = 0;
+    var listeningOnly = new Set();
     function onMessageHndl(target, context, message, self)
     {
         if (self) return;
@@ -120,6 +121,37 @@ function startCelestia(token, data)
                 client.say(target, `HOW DARETH THOU BOOPETH ME! I AM THE PRINCESS OF THE DAY! I SHALL BOOPETH THEE BACK! BOOP!!!`);
                 console.log("\n ~ ~ ~ ~ ~ Command Executed ~ ~ ~ ~ ~\n\nCommandName: " + cmdName + "\nExecuted by: " + context.username + `\nTimestamp: ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}` +"\n\n~ ~ ~ End of Command Execution ~ ~ ~\n");
                 break;
+            }
+
+            case "!lurk":
+            {
+                if(listeningOnly.has(context.username)) {
+                    listeningOnly.delete(context.username);
+                    client.say(target, "Welcome back to the light, my dear child. We hope you enjoy your stay!");
+                    console.log("\n ~ ~ ~ ~ ~ Command Executed ~ ~ ~ ~ ~\n\nCommandName: " + cmdName + " (Remove)\nExecuted by: " + context.username + `\nTimestamp: ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}` +"\n\n~ ~ ~ End of Command Execution ~ ~ ~\n");
+                    break;
+                }
+
+                client.say(target, "Thou art welcome to lurk in the shadows, dear one. I shall be here when thou art ready to return to the light.");
+                listeningOnly.add(context.username);
+                console.log("\n ~ ~ ~ ~ ~ Command Executed ~ ~ ~ ~ ~\n\nCommandName: " + cmdName + " (Add)\nExecuted by: " + context.username + `\nTimestamp: ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}` +"\n\n~ ~ ~ End of Command Execution ~ ~ ~\n");
+                break;
+            }
+
+            case "!commands":
+            {
+                client.say(target, "Commands: !whoarethey?, TOP_SECRET(IWJvb3A=), !lurk, !discord");
+                console.log("\n ~ ~ ~ ~ ~ Command Executed ~ ~ ~ ~ ~\n\nCommandName: " + cmdName + "\nExecuted by: " + context.username + `\nTimestamp: ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}` +"\n\n~ ~ ~ End of Command Execution ~ ~ ~\n");
+                break;
+            }
+
+            default:
+            {
+                if(["!discord", "!server", "!socials"].includes(cmdName))
+                {
+                    client.say(target, "You can see our socials and many more here! http://thelunareclipse.site");
+                    console.log("\n ~ ~ ~ ~ ~ Command Executed ~ ~ ~ ~ ~\n\nCommandName: " + cmdName + "\nExecuted by: " + context.username + `\nTimestamp: ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}` +"\n\n~ ~ ~ End of Command Execution ~ ~ ~\n");
+                }
             }
         }
     }
